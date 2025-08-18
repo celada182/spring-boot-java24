@@ -1,0 +1,241 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    API - User - Game - Team
+  contact:
+    email: celada.jcm.javier@gmail.com
+  version: 1.0.11
+externalDocs:
+  description: Developer profile
+  url: https://www.linkedin.com/in/javier-celada-mu%C3%B1oz-877347104/
+servers:
+  - url: http://localhost:8080/api
+tags:
+  - name: user
+    description: User operations
+  - name: game
+    description: Game operations
+  - name: team
+    description: Team operations
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Create user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful operation
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+    get:
+      tags:
+        - user
+      summary: Get all users
+      operationId: getUsers
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+  /user/{userId}/game:
+    post:
+      tags:
+        - user
+      summary: Add a game to user
+      operationId: addGameToUser
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: Game added to user successfully
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+  /game:
+    post:
+      tags:
+        - game
+      summary: Create game
+      operationId: createGame
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: Successful operation
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+    get:
+      tags:
+        - game
+      summary: Get all games
+      operationId: getGames
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+  /team:
+    post:
+      tags:
+        - team
+      summary: Create team
+      operationId: createTeam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        '200':
+          description: Successful operation
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+    get:
+      tags:
+        - team
+      summary: Get all teams
+      operationId: getTeams
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+components:
+  schemas:
+    Game:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 100
+        name:
+          type: string
+          example: theGame
+        multiplayer:
+          type: boolean
+          example: true
+        users:
+          type: integer
+          format: int64
+          example: 100
+        teamSize:
+          type: integer
+          format: int32
+          example: 5
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: theUser
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+        games:
+          type: array
+          items:
+            $ref: '#/components/schemas/Game'
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: theTeam
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        game:
+          $ref: '#/components/schemas/Game'
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
