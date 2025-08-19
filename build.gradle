@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.4'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.openapi.generator' version '7.14.0'
 }
 
 group = 'com.celada.spring'
@@ -21,6 +22,7 @@ configurations {
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
@@ -38,3 +40,21 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = "$projectDir/src/main/resources/api.yml"
+    apiPackage = "com.celada.api"
+    modelPackage = "com.celada.api.model"
+    configOptions = [
+            interfaceOnly: "true",
+            openApiNullable: "false",
+            skipDefaultInterface: "true"
+    ]
+    globalProperties = [
+            apis: "",
+            models: ""
+    ]
+}
+compileJava.dependsOn tasks.openApiGenerate
+processResources.dependsOn tasks.openApiGenerate
