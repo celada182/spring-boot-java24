@@ -44,8 +44,9 @@ tasks.named('test') {
 openApiGenerate {
     generatorName = "spring"
     inputSpec = "$projectDir/src/main/resources/api.yml"
-    apiPackage = "com.celada.api"
-    modelPackage = "com.celada.api.model"
+	outputDir = "$buildDir/generated/openapi"
+    apiPackage = "com.celada.spring.hexagonal.api"
+    modelPackage = "com.celada.spring.hexagonal.api.model"
     configOptions = [
             interfaceOnly: "true",
             openApiNullable: "false",

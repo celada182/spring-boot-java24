@@ -29,7 +29,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/ApiUser'
       responses:
         '200':
           description: Successful operation
@@ -38,7 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Response"
+                $ref: "#/components/schemas/ApiModelResponse"
     get:
       tags:
         - user
@@ -52,13 +52,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: '#/components/schemas/ApiUser'
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Response"
+                $ref: "#/components/schemas/ApiModelResponse"
   /user/{userId}/game:
     post:
       tags:
@@ -76,7 +76,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Game'
+              $ref: '#/components/schemas/ApiGame'
       responses:
         '200':
           description: Game added to user successfully
@@ -85,13 +85,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Response"
+                $ref: "#/components/schemas/ApiModelResponse"
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Response"
+                $ref: "#/components/schemas/ApiModelResponse"
   /game:
     post:
       tags:
@@ -102,7 +102,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Game'
+              $ref: '#/components/schemas/ApiGame'
       responses:
         '200':
           description: Successful operation
@@ -111,7 +111,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Response"
+                $ref: "#/components/schemas/ApiModelResponse"
     get:
       tags:
         - game
@@ -125,13 +125,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Game'
+                  $ref: '#/components/schemas/ApiGame'
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Response"
+                $ref: "#/components/schemas/ApiModelResponse"
   /team:
     post:
       tags:
@@ -142,7 +142,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: '#/components/schemas/ApiTeam'
       responses:
         '200':
           description: Successful operation
@@ -151,7 +151,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Response"
+                $ref: "#/components/schemas/ApiModelResponse"
     get:
       tags:
         - team
@@ -165,16 +165,16 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Team'
+                  $ref: '#/components/schemas/ApiTeam'
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Response"
+                $ref: "#/components/schemas/ApiModelResponse"
 components:
   schemas:
-    Game:
+    ApiGame:
       type: object
       properties:
         id:
@@ -195,7 +195,7 @@ components:
           type: integer
           format: int32
           example: 5
-    User:
+    ApiUser:
       type: object
       properties:
         id:
@@ -214,8 +214,8 @@ components:
         games:
           type: array
           items:
-            $ref: '#/components/schemas/Game'
-    Team:
+            $ref: '#/components/schemas/ApiGame'
+    ApiTeam:
       type: object
       properties:
         id:
@@ -228,10 +228,10 @@ components:
         members:
           type: array
           items:
-            $ref: '#/components/schemas/User'
+            $ref: '#/components/schemas/ApiUser'
         game:
-          $ref: '#/components/schemas/Game'
-    Response:
+          $ref: '#/components/schemas/ApiGame'
+    ApiModelResponse:
       type: object
       properties:
         code:
