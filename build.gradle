@@ -1,8 +1,8 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.5.4'
-	id 'io.spring.dependency-management' version '1.1.7'
-	id 'org.openapi.generator' version '7.14.0'
+    id 'java'
+    id 'org.springframework.boot' version '3.5.4'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id "org.openapi.generator" version "7.14.0"
 }
 
 group = 'com.celada.spring'
@@ -10,52 +10,49 @@ version = '0.0.1-SNAPSHOT'
 description = 'Latest Hexagonal Spring App'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(24)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenLocal()
-	mavenCentral()
+    mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-ldap'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
+    implementation 'org.springframework.boot:spring-boot-starter-data-ldap'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 openApiGenerate {
-    generatorName = "spring"
-    inputSpec = "$projectDir/src/main/resources/api.yml"
-	outputDir = "$buildDir/generated/openapi"
-    apiPackage = "com.celada.spring.hexagonal.api"
-    modelPackage = "com.celada.spring.hexagonal.api.model"
-    configOptions = [
-            interfaceOnly: "true",
-            openApiNullable: "false",
-            skipDefaultInterface: "true"
-    ]
-    globalProperties = [
-            apis: "",
-            models: ""
-    ]
+    generatorName.set('spring')
+    inputSpec.set("$rootDir/api.yml")
+    configOptions.set([
+            interfaceOnly       : 'true',
+            openApiNullable     : 'false',
+            skipDefaultInterface: 'true'
+    ])
+    modelPackage.set('com.celada.openapi.model')
+    apiPackage.set('com.celada.openapi.api')
 }
-compileJava.dependsOn tasks.openApiGenerate
-processResources.dependsOn tasks.openApiGenerate
+
+tasks.named('compileJava') {
+    dependsOn(tasks.openApiGenerate)
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
