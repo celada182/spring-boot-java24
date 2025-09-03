@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Swagger Petstore - OpenAPI 3.0
+  title: Games API
   description: |-
     API - User - Game - Team
   contact:
@@ -29,7 +29,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ApiUser'
+              $ref: '#/components/schemas/RestUser'
       responses:
         '200':
           description: Successful operation
@@ -38,7 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiModelResponse"
+                $ref: "#/components/schemas/RestModelResponse"
     get:
       tags:
         - user
@@ -52,13 +52,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ApiUser'
+                  $ref: '#/components/schemas/RestUser'
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiModelResponse"
+                $ref: "#/components/schemas/RestModelResponse"
   /user/{userId}/game:
     post:
       tags:
@@ -76,7 +76,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ApiGame'
+              $ref: '#/components/schemas/RestGame'
       responses:
         '200':
           description: Game added to user successfully
@@ -85,13 +85,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiModelResponse"
+                $ref: "#/components/schemas/RestModelResponse"
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiModelResponse"
+                $ref: "#/components/schemas/RestModelResponse"
   /game:
     post:
       tags:
@@ -102,7 +102,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ApiGame'
+              $ref: '#/components/schemas/RestGame'
       responses:
         '200':
           description: Successful operation
@@ -111,7 +111,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiModelResponse"
+                $ref: "#/components/schemas/RestModelResponse"
     get:
       tags:
         - game
@@ -125,13 +125,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ApiGame'
+                  $ref: '#/components/schemas/RestGame'
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiModelResponse"
+                $ref: "#/components/schemas/RestModelResponse"
   /team:
     post:
       tags:
@@ -142,7 +142,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ApiTeam'
+              $ref: '#/components/schemas/RestTeam'
       responses:
         '200':
           description: Successful operation
@@ -151,7 +151,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiModelResponse"
+                $ref: "#/components/schemas/RestModelResponse"
     get:
       tags:
         - team
@@ -165,16 +165,16 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ApiTeam'
+                  $ref: '#/components/schemas/RestTeam'
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiModelResponse"
+                $ref: "#/components/schemas/RestModelResponse"
 components:
   schemas:
-    ApiGame:
+    RestGame:
       type: object
       properties:
         id:
@@ -195,7 +195,7 @@ components:
           type: integer
           format: int32
           example: 5
-    ApiUser:
+    RestUser:
       type: object
       properties:
         id:
@@ -214,8 +214,8 @@ components:
         games:
           type: array
           items:
-            $ref: '#/components/schemas/ApiGame'
-    ApiTeam:
+            $ref: '#/components/schemas/RestGame'
+    RestTeam:
       type: object
       properties:
         id:
@@ -228,10 +228,10 @@ components:
         members:
           type: array
           items:
-            $ref: '#/components/schemas/ApiUser'
+            $ref: '#/components/schemas/RestUser'
         game:
-          $ref: '#/components/schemas/ApiGame'
-    ApiModelResponse:
+          $ref: '#/components/schemas/RestGame'
+    RestModelResponse:
       type: object
       properties:
         code:
