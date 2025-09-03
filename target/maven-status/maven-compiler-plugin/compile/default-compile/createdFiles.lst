@@ -1,0 +1,17 @@
+com\celada\spring\hexagonal\domain\model\Game.class
+com\celada\spring\hexagonal\domain\model\Game$GameBuilder.class
+com\celada\openapi\api\TeamApi.class
+com\celada\spring\hexagonal\inbound\rest\adapter\GameAdapter.class
+com\celada\openapi\model\RestModelResponse.class
+com\celada\openapi\model\RestUser.class
+com\celada\spring\hexagonal\inbound\rest\controller\GameController.class
+com\celada\openapi\api\GameApi.class
+com\celada\openapi\model\RestGame.class
+com\celada\spring\hexagonal\domain\service\GameService.class
+com\celada\spring\hexagonal\domain\model\Team.class
+com\celada\spring\hexagonal\configuration\MapperConfiguration.class
+com\celada\spring\hexagonal\inbound\rest\mapper\GameMapper.class
+com\celada\spring\hexagonal\HexagonalApplication.class
+com\celada\openapi\api\UserApi.class
+com\celada\openapi\model\RestTeam.class
+com\celada\spring\hexagonal\domain\model\User.class

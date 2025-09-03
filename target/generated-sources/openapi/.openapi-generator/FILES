@@ -1,0 +1,7 @@
+src/main/java/com/celada/openapi/api/GameApi.java
+src/main/java/com/celada/openapi/api/TeamApi.java
+src/main/java/com/celada/openapi/api/UserApi.java
+src/main/java/com/celada/openapi/model/RestGame.java
+src/main/java/com/celada/openapi/model/RestModelResponse.java
+src/main/java/com/celada/openapi/model/RestTeam.java
+src/main/java/com/celada/openapi/model/RestUser.java
