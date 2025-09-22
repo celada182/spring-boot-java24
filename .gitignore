@@ -1,3 +1,4 @@
+target/
 containers/kafka/kafka
 
 .gradle
