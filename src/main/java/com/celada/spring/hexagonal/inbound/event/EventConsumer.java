@@ -1,6 +1,7 @@
 package com.celada.spring.hexagonal.inbound.event;
 
 import com.celada.spring.hexagonal.domain.model.Game;
+import com.celada.spring.hexagonal.domain.service.GameService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,13 @@ import java.util.List;
 @Slf4j
 public class EventConsumer {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final GameService service;
+    private final ObjectMapper objectMapper;
+
+    public EventConsumer(GameService service) {
+        this.service = service;
+        this.objectMapper = new ObjectMapper();
+    }
 
     @KafkaListener(
             topics = "api-game",
@@ -28,8 +35,7 @@ public class EventConsumer {
             try {
                 Game response = objectMapper.readValue(message.value(), Game.class);
                 log.info("Partition = {}, Offset = {}, Key = {}", message.partition(), message.offset(), message.key());
-                log.info("Response = {}", response);
-
+                service.readGameEvent(response);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }

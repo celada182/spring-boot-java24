@@ -1,5 +1,8 @@
 package com.celada.spring.hexagonal.outbound.event.configuration;
 
+import com.celada.spring.hexagonal.outbound.event.GameEventKafkaProducer;
+import com.celada.spring.hexagonal.outbound.event.GameEventProducer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,5 +31,10 @@ public class ProducerConfiguration {
     public KafkaTemplate<String, String> kafkaTemplate(Map<String, Object> producerProperties) {
         DefaultKafkaProducerFactory<String, String> producerFactory = new DefaultKafkaProducerFactory<>(producerProperties);
         return new KafkaTemplate<>(producerFactory);
+    }
+
+    @Bean
+    public GameEventProducer gameEventProducer(KafkaTemplate<String, String> kafkaTemplate) {
+        return new GameEventKafkaProducer(new ObjectMapper(), kafkaTemplate);
     }
 }
