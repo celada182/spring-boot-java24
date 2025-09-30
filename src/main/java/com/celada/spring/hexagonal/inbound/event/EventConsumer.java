@@ -1,6 +1,6 @@
 package com.celada.spring.hexagonal.inbound.event;
 
-import com.celada.spring.hexagonal.inbound.event.model.GameResponse;
+import com.celada.spring.hexagonal.domain.model.Game;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class EventConsumer {
     public void listen(List<ConsumerRecord<String, String>> messages) {
         for (ConsumerRecord<String, String> message : messages) {
             try {
-                GameResponse response = objectMapper.readValue(message.value(), GameResponse.class);
+                Game response = objectMapper.readValue(message.value(), Game.class);
                 log.info("Partition = {}, Offset = {}, Key = {}", message.partition(), message.offset(), message.key());
                 log.info("Response = {}", response);
 

@@ -1,6 +1,6 @@
 package com.celada.spring.hexagonal;
 
-import com.celada.spring.hexagonal.inbound.event.EventProducer;
+import com.celada.spring.hexagonal.outbound.event.EventProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
