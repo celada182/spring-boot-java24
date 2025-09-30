@@ -1,4 +1,4 @@
-package com.celada.spring.hexagonal.configuration;
+package com.celada.spring.hexagonal.inbound.event.configuration;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -24,7 +24,7 @@ public class KafkaConfiguration {
     @Bean
     public Map<String, Object> consumerProperties() {
         return Map.of(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, servers,
-                ConsumerConfig.GROUP_ID_CONFIG, "first-group",
+                ConsumerConfig.GROUP_ID_CONFIG, "api-game-group",
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class,
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
     }
