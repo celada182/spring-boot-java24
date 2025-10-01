@@ -13,12 +13,12 @@ import java.util.List;
 
 @Slf4j
 @RestController
-public class GameController implements GameApi {
+public class GamesController implements GameApi {
 
     private final GameService service;
     private final GameAdapter adapter;
 
-    public GameController(GameService service, GameAdapter adapter) {
+    public GamesController(GameService service, GameAdapter adapter) {
         this.service = service;
         this.adapter = adapter;
     }

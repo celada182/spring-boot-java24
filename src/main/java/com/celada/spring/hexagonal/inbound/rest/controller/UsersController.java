@@ -13,12 +13,12 @@ import java.util.List;
 
 @Slf4j
 @RestController
-public class UserController implements UserApi {
+public class UsersController implements UserApi {
 
     private final UserService service;
     private final UserAdapter adapter;
 
-    public UserController(UserService service, UserAdapter adapter) {
+    public UsersController(UserService service, UserAdapter adapter) {
         this.service = service;
         this.adapter = adapter;
     }
