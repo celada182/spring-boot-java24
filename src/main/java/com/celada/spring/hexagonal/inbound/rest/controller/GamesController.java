@@ -1,6 +1,6 @@
 package com.celada.spring.hexagonal.inbound.rest.controller;
 
-import com.celada.openapi.api.GameApi;
+import com.celada.openapi.api.GamesApi;
 import com.celada.openapi.model.RestGame;
 import com.celada.spring.hexagonal.domain.model.Game;
 import com.celada.spring.hexagonal.domain.service.GameService;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-public class GamesController implements GameApi {
+public class GamesController implements GamesApi {
 
     private final GameService service;
     private final GameAdapter adapter;
